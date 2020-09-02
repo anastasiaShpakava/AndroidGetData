@@ -1,18 +1,41 @@
+
 package com.company.myapp;
 
-public class User {
-    private long id;
-private String name;
-private String username;
-private String email;
-private String phone;
-private String website;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public long getId() {
+public class User {
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("username")
+    @Expose
+    private String username;
+    @SerializedName("email")
+    @Expose
+    private String email;
+    @SerializedName("address")
+    @Expose
+    private Address address;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+    @SerializedName("website")
+    @Expose
+    private String website;
+    @SerializedName("company")
+    @Expose
+    private Company company;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -40,6 +63,14 @@ private String website;
         this.email = email;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -55,4 +86,13 @@ private String website;
     public void setWebsite(String website) {
         this.website = website;
     }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
 }
