@@ -9,19 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private List<User> userList = new ArrayList<>();
-    private RecyclerView recyclerView;
+   // private List<User> userList = new ArrayList<>();
+   // private RecyclerView recyclerView;
+    Controller controller = new Controller(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        setInitialData();
-        recyclerView = findViewById(R.id.list);
-        UserAdapter userAdapter = new UserAdapter(this, userList);
-        recyclerView.setAdapter(userAdapter);
+        controller.start();
+//        recyclerView = findViewById(R.id.list);
+//        UserAdapter userAdapter = new UserAdapter(this, userList);
+//        recyclerView.setAdapter(userAdapter);
     }
-    private void setInitialData (){
 
-    }
 }

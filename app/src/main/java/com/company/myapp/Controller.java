@@ -1,5 +1,11 @@
 package com.company.myapp;
 
+import android.content.Context;
+import android.util.Log;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -10,7 +16,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Controller implements Callback<List<User>> {
     static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
-public void start () {
+    private List<User> userList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    MainActivity mainActivity;
+    Context context;
+
+    public Controller(MainActivity mainActivity1) {
+        this.mainActivity= mainActivity1;
+    }
+
+    public void start () {
+    recyclerView =(RecyclerView)this.mainActivity.findViewById(R.id.list);
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -24,15 +41,12 @@ public void start () {
 
     @Override
     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-        if (response.isSuccessful()) {
-            System.out.println("response " + response.body().size());
-        } else {
-            System.out.println("response code " + response.code());
-        }
+        UserAdapter userAdapter = new UserAdapter(mainActivity, userList);
+        recyclerView.setAdapter(userAdapter);
     }
 
     @Override
     public void onFailure(Call<List<User>> call, Throwable t) {
-        System.out.println("fail" + t);
+        Log.d("dd", "dd", t);
     }
 }
