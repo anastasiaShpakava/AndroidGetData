@@ -16,32 +16,30 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Controller implements Callback<List<User>> {
     static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
-    private List<User> userList = new ArrayList<>();
     private RecyclerView recyclerView;
-    MainActivity mainActivity;
-    Context context;
+    private MainActivity mainActivity;
 
-    public Controller(MainActivity mainActivity1) {
-        this.mainActivity= mainActivity1;
+    public Controller(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
     }
 
-    public void start () {
-    recyclerView =(RecyclerView)this.mainActivity.findViewById(R.id.list);
+    public void start() {
+        recyclerView = this.mainActivity.findViewById(R.id.list);
 
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-    ServerApi serverApi = retrofit.create(ServerApi.class);
+        ServerApi serverApi = retrofit.create(ServerApi.class);
 
-    Call<List<User>> users = serverApi.getUsers();
-    users.enqueue(this);
-}
+        Call<List<User>> users = serverApi.getUsers();
+        users.enqueue(this);
+    }
 
     @Override
     public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-        UserAdapter userAdapter = new UserAdapter(mainActivity, userList);
+        UserAdapter userAdapter = new UserAdapter(mainActivity, response.body());
         recyclerView.setAdapter(userAdapter);
     }
 
