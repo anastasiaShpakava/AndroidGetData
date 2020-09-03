@@ -47,4 +47,5 @@ public class Controller implements Callback<List<User>> {
     public void onFailure(Call<List<User>> call, Throwable t) {
         Log.d("error", "can't parse data: ", t);
     }
+
 }
