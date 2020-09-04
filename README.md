@@ -1,2 +1,2 @@
 
-Get data by GET request to listview.
+Get data by GET request to RecyclerView.
