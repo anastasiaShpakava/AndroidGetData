@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static int TYPE_ADDRESS = 1;
-    private static int TYPE_USER = 2;
+    private static int TYPE_ADDRESS= 1;
+    private static int TYPE_USER = 5;
 
     private LayoutInflater layoutInflater;
     private Context context;
@@ -28,11 +28,15 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
         if (viewType == TYPE_ADDRESS){
-            return new AddressViewHolder (layoutInflater.inflate(R.layout.list_item, parent, false));
-        }else if(viewType == TYPE_USER) {
-            return new UsersViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
-        }
+             view = layoutInflater.inflate(R.layout.list_item, parent, false);
+             return  new AddressViewHolder(view);
+        }else if (viewType ==TYPE_USER) {
+            view = layoutInflater.inflate(R.layout.list_item, parent, false);
+            return new UsersViewHolder(view);
+        }else view = layoutInflater.inflate(R.layout.list_item, parent, false);
+        return new UsersViewHolder(view);
     }
 
     @Override
@@ -47,7 +51,10 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ((UsersViewHolder) holder).website.setText(user.getWebsite());
         } else if (holder instanceof AddressViewHolder) {
             Address address = new Address();
+            ((AddressViewHolder) holder).street.setText(address.getStreet());
+            ((AddressViewHolder) holder).suite.setText(address.getSuite());
             ((AddressViewHolder) holder).city.setText(address.getCity());
+            ((AddressViewHolder) holder).zipcode.setText(address.getZipcode());
         }
     }
 
@@ -59,17 +66,17 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-      if (position==1){
-          return TYPE_ADDRESS;
-      }else
-          return TYPE_USER;
+        return (position <=4 )? TYPE_USER:TYPE_ADDRESS;
     }
 
 public static class AddressViewHolder extends RecyclerView.ViewHolder{
-final TextView city;
+final TextView street, suite, city, zipcode;
     public AddressViewHolder(@NonNull View itemView) {
         super(itemView);
+        street = itemView.findViewById(R.id.street);
+        suite = itemView.findViewById(R.id.suite);
         city = itemView.findViewById(R.id.city);
+        zipcode = itemView.findViewById(R.id.zipcode);
     }
 }
 
@@ -83,7 +90,6 @@ final TextView city;
             email = itemView.findViewById(R.id.email);
             phone = itemView.findViewById(R.id.phone);
             website = itemView.findViewById(R.id.website);
-
         }
     }
 }
