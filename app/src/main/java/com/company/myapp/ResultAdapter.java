@@ -30,24 +30,25 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_ADDRESS){
             return new AddressViewHolder (layoutInflater.inflate(R.layout.list_item, parent, false));
-        }else if(viewType == TYPE_USER){
+        }else if(viewType == TYPE_USER) {
             return new UsersViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
-        }else return new AddressViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
-//        View view = layoutInflater.inflate(R.layout.list_item, parent, false);
-//        return new ViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-if (holder instanceof AddressViewHolder){
-Address address = new Address();
-((AddressViewHolder) holder).city.setText(address.getCity());
-} else if (holder instanceof UsersViewHolder){
-UsersViewHolder usersViewHolder = (UsersViewHolder) holder;
-    final User user = users.get(position);
-    ((UsersViewHolder) holder).name.setText(user.getName());
-
-}
+        if (holder instanceof UsersViewHolder) {
+            final User user = users.get(position);
+            ((UsersViewHolder) holder).id.setText(String.valueOf(user.getId()));
+            ((UsersViewHolder) holder).name.setText(user.getName());
+            ((UsersViewHolder) holder).userName.setText(user.getUsername());
+            ((UsersViewHolder) holder).email.setText(user.getEmail());
+            ((UsersViewHolder) holder).phone.setText(user.getPhone());
+            ((UsersViewHolder) holder).website.setText(user.getWebsite());
+        } else if (holder instanceof AddressViewHolder) {
+            Address address = new Address();
+            ((AddressViewHolder) holder).city.setText(address.getCity());
+        }
     }
 
 
@@ -73,10 +74,15 @@ final TextView city;
 }
 
    public static class  UsersViewHolder extends RecyclerView.ViewHolder{
-       final TextView name;
+       final TextView id, name, userName, email, phone, website;
         public UsersViewHolder(@NonNull View itemView) {
             super(itemView);
+            id = itemView.findViewById(R.id.id);
             name = itemView.findViewById(R.id.name);
+            userName = itemView.findViewById(R.id.username);
+            email = itemView.findViewById(R.id.email);
+            phone = itemView.findViewById(R.id.phone);
+            website = itemView.findViewById(R.id.website);
 
         }
     }
