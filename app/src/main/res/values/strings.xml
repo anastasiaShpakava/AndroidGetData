@@ -2,4 +2,6 @@
     <string name="app_name">MyApp</string>
     <string name="user_data">User\'s data: </string>
     <string name="address">Address: </string>
+    <string name="company">Company: </string>
+    <string name="geo">Geo: </string>
 </resources>

@@ -13,7 +13,9 @@ import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static int TYPE_ADDRESS= 1;
-    private static int TYPE_USER = 5;
+    private static int TYPE_USER = 2;
+    private static int TYPE_COMPANY = 3;
+    private static int TYPE_GEO = 4;
 
     private LayoutInflater layoutInflater;
     private Context context;
@@ -28,21 +30,21 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
-        if (viewType == TYPE_ADDRESS){
-             view = layoutInflater.inflate(R.layout.list_item, parent, false);
-             return  new AddressViewHolder(view);
-        }else if (viewType ==TYPE_USER) {
-            view = layoutInflater.inflate(R.layout.list_item, parent, false);
-            return new UsersViewHolder(view);
-        }else view = layoutInflater.inflate(R.layout.list_item, parent, false);
-        return new UsersViewHolder(view);
+        if (viewType == TYPE_ADDRESS) {
+            return new AddressViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
+        } else if (viewType == TYPE_USER) {
+            return new UsersViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
+        } else if (viewType == TYPE_COMPANY) {
+            return new CompanyViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
+        } else if (viewType == TYPE_GEO) {
+            return new GeoViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
+        } else  return new UsersViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        final User user = users.get(position);
         if (holder instanceof UsersViewHolder) {
-            final User user = users.get(position);
             ((UsersViewHolder) holder).id.setText(String.valueOf(user.getId()));
             ((UsersViewHolder) holder).name.setText(user.getName());
             ((UsersViewHolder) holder).userName.setText(user.getUsername());
@@ -50,23 +52,32 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ((UsersViewHolder) holder).phone.setText(user.getPhone());
             ((UsersViewHolder) holder).website.setText(user.getWebsite());
         } else if (holder instanceof AddressViewHolder) {
-            Address address = new Address();
+            Address address = user.getAddress();
             ((AddressViewHolder) holder).street.setText(address.getStreet());
             ((AddressViewHolder) holder).suite.setText(address.getSuite());
             ((AddressViewHolder) holder).city.setText(address.getCity());
             ((AddressViewHolder) holder).zipcode.setText(address.getZipcode());
+        }else if (holder instanceof CompanyViewHolder) {
+            Company company = user.getCompany();
+            ((CompanyViewHolder) holder).companyName.setText(company.getName());
+            ((CompanyViewHolder) holder).catchPhrase.setText(company.getCatchPhrase());
+            ((CompanyViewHolder) holder).bs.setText(company.getBs());
+        } else if (holder instanceof GeoViewHolder){
+            Geo geo = user.getAddress().getGeo();
+            ((GeoViewHolder) holder).lat.setText(geo.getLat());
+            ((GeoViewHolder) holder).lng.setText(geo.getLng());
         }
     }
 
 
     @Override
     public int getItemCount() {
-        return users.size();
+       return users.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return (position <=4 )? TYPE_USER:TYPE_ADDRESS;
+        return position;
     }
 
 public static class AddressViewHolder extends RecyclerView.ViewHolder{
@@ -90,6 +101,24 @@ final TextView street, suite, city, zipcode;
             email = itemView.findViewById(R.id.email);
             phone = itemView.findViewById(R.id.phone);
             website = itemView.findViewById(R.id.website);
+        }
+    }
+    public static class CompanyViewHolder extends RecyclerView.ViewHolder{
+        final TextView companyName, catchPhrase, bs;
+        public CompanyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            companyName = itemView.findViewById(R.id.companyName);
+            catchPhrase = itemView.findViewById(R.id.catchPhrase);
+            bs = itemView.findViewById(R.id.bs);
+        }
+    }
+
+    public static class GeoViewHolder extends RecyclerView.ViewHolder{
+        final TextView lat, lng;
+        public GeoViewHolder(@NonNull View itemView) {
+            super(itemView);
+            lat = itemView.findViewById(R.id.lat);
+            lng = itemView. findViewById(R.id.lng);
         }
     }
 }
