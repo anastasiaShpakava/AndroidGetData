@@ -30,15 +30,17 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = layoutInflater.inflate(R.layout.list_item, parent, false);
         if (viewType == TYPE_ADDRESS) {
-            return new AddressViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
+            return new AddressViewHolder (view);
         } else if (viewType == TYPE_USER) {
-            return new UsersViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
+            return new UsersViewHolder (view);
         } else if (viewType == TYPE_COMPANY) {
-            return new CompanyViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
+            return new CompanyViewHolder (view);
         } else if (viewType == TYPE_GEO) {
-            return new GeoViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
-        } else  return new UsersViewHolder(layoutInflater.inflate(R.layout.list_item, parent, false));
+            return new GeoViewHolder (view);
+        }
+        return new UsersViewHolder(view);
     }
 
     @Override
