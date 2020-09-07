@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 
+
 public class MainActivity extends AppCompatActivity {
     Controller controller = new Controller(this);
     @Override
@@ -13,5 +14,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         controller.start();
+
     }
 }

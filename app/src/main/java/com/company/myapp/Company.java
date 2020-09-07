@@ -4,7 +4,7 @@ package com.company.myapp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Company {
+public class Company{
 
     @SerializedName("name")
     @Expose
@@ -15,6 +15,12 @@ public class Company {
     @SerializedName("bs")
     @Expose
     private String bs;
+
+    public Company(String name, String catchPhrase, String bs) {
+        this.name = name;
+        this.catchPhrase = catchPhrase;
+        this.bs = bs;
+    }
 
     public String getName() {
         return name;
