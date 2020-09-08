@@ -35,8 +35,6 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             return new AddressViewHolder(view);
         } else if (viewType == TYPE_USER) {
             return new UsersViewHolder(view);
-//        } else if (viewType == TYPE_COMPANY) {
-//            return new CompanyViewHolder (view);
         } else if (viewType == TYPE_GEO) {
             return new GeoViewHolder(view);
         } else
