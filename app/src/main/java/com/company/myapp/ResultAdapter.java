@@ -38,8 +38,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         } else if (viewType == TYPE_GEO) {
             return new GeoViewHolder(view);
         } else
-            return new CompanyViewHolder(view);
-    }
+            return new CompanyViewHolder(view); }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
