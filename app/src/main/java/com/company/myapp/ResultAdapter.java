@@ -43,7 +43,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        final User user = users.get(position);
+        final User user = users.get(position/4);
         if (holder instanceof UsersViewHolder) {
             ((UsersViewHolder) holder).id.setText(String.valueOf(user.getId()));
             ((UsersViewHolder) holder).name.setText(user.getName());
@@ -72,17 +72,16 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return users.size() + 4;
+        return users.size() * 4;
     }
-
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
+        if (position % 4 == 0) {
             return TYPE_USER;
-        } else if (position == 1) {
+        } else if (position % 4 == 1) {
             return TYPE_ADDRESS;
-        } else if (position == 2) {
+        } else if (position % 4 == 2) {
             return TYPE_GEO;
         } else return TYPE_COMPANY;
     }
