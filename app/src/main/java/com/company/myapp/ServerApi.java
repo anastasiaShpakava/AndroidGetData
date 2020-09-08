@@ -7,5 +7,5 @@ import retrofit2.http.GET;
 
 public interface ServerApi  {
     @GET("users")
-    Call<List<User>> getUsers();
+    Call<List<UserInfo>> getUsers();
 }

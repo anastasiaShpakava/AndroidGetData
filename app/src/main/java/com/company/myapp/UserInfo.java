@@ -3,29 +3,29 @@ package com.company.myapp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public abstract class UserInfo {
-    @SerializedName("id")
+public  class UserInfo {
+    @SerializedName("idI")
     @Expose
     private Integer id;
-    @SerializedName("name")
+    @SerializedName("nameI")
     @Expose
     private String name;
-    @SerializedName("username")
+    @SerializedName("usernameI")
     @Expose
     private String username;
-    @SerializedName("email")
+    @SerializedName("emailI")
     @Expose
     private String email;
-    @SerializedName("address")
+    @SerializedName("addressI")
     @Expose
     private Address address;
-    @SerializedName("phone")
+    @SerializedName("phoneI")
     @Expose
     private String phone;
-    @SerializedName("website")
+    @SerializedName("websiteI")
     @Expose
     private String website;
-    @SerializedName("company")
+    @SerializedName("companyI")
     @Expose
     private Company company;
 
@@ -39,6 +39,10 @@ public abstract class UserInfo {
         this.phone = phone;
         this.website = website;
         this.company = company;
+    }
+
+    public UserInfo() {
+
     }
 
     public Integer getId() {

@@ -4,7 +4,7 @@ package com.company.myapp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Geo {
+public class Geo extends UserInfo{
 
     @SerializedName("lat")
     @Expose
@@ -13,10 +13,10 @@ public class Geo {
     @Expose
     private String lng;
 
-    public Geo(String lat, String lng) {
-        this.lat = lat;
-        this.lng = lng;
+    public Geo(Integer id, String name, String username, String email, Address address, String phone, String website, Company company) {
+        super(id, name, username, email, address, phone, website, company);
     }
+
 
     public String getLat() {
         return lat;

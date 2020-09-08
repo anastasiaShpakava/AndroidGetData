@@ -12,7 +12,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Controller implements Callback<List<User>> {
+public class Controller implements Callback<List<UserInfo>> {
     static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
     private RecyclerView recyclerView;
     private MainActivity mainActivity;
@@ -30,19 +30,18 @@ public class Controller implements Callback<List<User>> {
                 .build();
 
         ServerApi serverApi = retrofit.create(ServerApi.class);
-
-        Call<List<User>> users = serverApi.getUsers();
+        Call<List<UserInfo>> users = serverApi.getUsers();
         users.enqueue(this);
     }
 
     @Override
-    public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+    public void onResponse(Call<List<UserInfo>> call, Response<List<UserInfo>> response) {
         ResultAdapter resultAdapter = new ResultAdapter(mainActivity, response.body());
         recyclerView.setAdapter(resultAdapter);
     }
 
     @Override
-    public void onFailure(Call<List<User>> call, Throwable t) {
+    public void onFailure(Call<List<UserInfo>> call, Throwable t) {
         Log.d("error", "can't parse data: ", t);
     }
 }

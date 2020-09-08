@@ -4,7 +4,7 @@ package com.company.myapp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Address {
+public class Address extends UserInfo {
 
     @SerializedName("street")
     @Expose
@@ -22,13 +22,10 @@ public class Address {
     @Expose
     private Geo geo;
 
-    public Address(String street, String suite, String city, String zipcode, Geo geo) {
-        this.street = street;
-        this.suite = suite;
-        this.city = city;
-        this.zipcode = zipcode;
-        this.geo = geo;
+    public Address(Integer id, String name, String username, String email, Address address, String phone, String website, Company company) {
+        super(id, name, username, email, address, phone, website, company);
     }
+
 
     public String getStreet() {
         return street;

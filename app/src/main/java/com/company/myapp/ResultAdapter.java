@@ -18,14 +18,13 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private static int TYPE_COMPANY = 3;
 
     private LayoutInflater layoutInflater;
-    private List<User> users;
+    private List<UserInfo> usersInfo;
 
 
-    public ResultAdapter(Context context, List<User> users) {
-        this.users = users;
+    public ResultAdapter(Context context, List<UserInfo> userInfo) {
+        this.usersInfo = userInfo;
         this.layoutInflater = LayoutInflater.from(context);
     }
-
 
     @NonNull
     @Override
@@ -43,8 +42,9 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        final User user = users.get(position);
+        UserInfo user = usersInfo.get(position);
         if (holder instanceof UsersViewHolder) {
+
             ((UsersViewHolder) holder).id.setText(String.valueOf(user.getId()));
             ((UsersViewHolder) holder).name.setText(user.getName());
             ((UsersViewHolder) holder).userName.setText(user.getUsername());
@@ -72,19 +72,20 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return users.size() + 4;
+        return usersInfo.size();
     }
 
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0) {
+        UserInfo userInfos = usersInfo.get(position);
+        if (userInfos instanceof User){
             return TYPE_USER;
-        } else if (position == 1) {
+        }else if (userInfos instanceof Address){
             return TYPE_ADDRESS;
-        } else if (position == 2) {
+        }else if(userInfos instanceof Geo){
             return TYPE_GEO;
-        } else return TYPE_COMPANY;
+        }else return TYPE_COMPANY;
     }
 
     public static class UsersViewHolder extends RecyclerView.ViewHolder {
