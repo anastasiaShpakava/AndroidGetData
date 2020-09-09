@@ -16,12 +16,6 @@ public class Company{
     @Expose
     private String bs;
 
-    public Company(String name, String catchPhrase, String bs) {
-        this.name = name;
-        this.catchPhrase = catchPhrase;
-        this.bs = bs;
-    }
-
     public String getName() {
         return name;
     }

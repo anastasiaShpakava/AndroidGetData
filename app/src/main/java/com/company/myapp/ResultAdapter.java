@@ -12,20 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private static int TYPE_USER = 0;
-    private static int TYPE_ADDRESS = 1;
-    private static int TYPE_GEO = 2;
-    private static int TYPE_COMPANY = 3;
+    private static final int TYPE_USER = 0;
+    private static final int TYPE_ADDRESS = 1;
+    private static final int TYPE_GEO = 2;
+    private static final int TYPE_COMPANY = 3;
 
     private LayoutInflater layoutInflater;
     private List<User> users;
-
 
     public ResultAdapter(Context context, List<User> users) {
         this.users = users;
         this.layoutInflater = LayoutInflater.from(context);
     }
-
 
     @NonNull
     @Override
@@ -57,11 +55,13 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             ((AddressViewHolder) holder).suite.setText(address.getSuite());
             ((AddressViewHolder) holder).city.setText(address.getCity());
             ((AddressViewHolder) holder).zipcode.setText(address.getZipcode());
+
         } else if (holder instanceof CompanyViewHolder) {
             Company company = user.getCompany();
             ((CompanyViewHolder) holder).companyName.setText(company.getName());
             ((CompanyViewHolder) holder).catchPhrase.setText(company.getCatchPhrase());
             ((CompanyViewHolder) holder).bs.setText(company.getBs());
+
         } else if (holder instanceof GeoViewHolder) {
             Geo geo = user.getAddress().getGeo();
             ((GeoViewHolder) holder).lat.setText(geo.getLat());
