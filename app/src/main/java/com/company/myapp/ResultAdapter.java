@@ -31,18 +31,18 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_ADDRESS) {
-            return new AddressViewHolder(layoutInflater.inflate(R.layout.list_item_address,parent,false));
+            return new AddressViewHolder(layoutInflater.inflate(R.layout.list_item_address, parent, false));
         } else if (viewType == TYPE_USER) {
-            return new UsersViewHolder(layoutInflater.inflate(R.layout.list_item_user,parent,false));
+            return new UsersViewHolder(layoutInflater.inflate(R.layout.list_item_user, parent, false));
         } else if (viewType == TYPE_GEO) {
-            return new GeoViewHolder(layoutInflater.inflate(R.layout.list_item_geo,parent,false));
+            return new GeoViewHolder(layoutInflater.inflate(R.layout.list_item_geo, parent, false));
         } else
-            return new CompanyViewHolder(layoutInflater.inflate(R.layout.list_item_company,parent,false));
+            return new CompanyViewHolder(layoutInflater.inflate(R.layout.list_item_company, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        final User user = users.get(position/4);
+        final User user = users.get(position / 4);
         if (holder instanceof UsersViewHolder) {
             ((UsersViewHolder) holder).id.setText(String.valueOf(user.getId()));
             ((UsersViewHolder) holder).name.setText(user.getName());
